@@ -38,16 +38,36 @@ const comment = await prisma.comments.create({
         content, 
         author, 
         password,
-        reviewId: +reviewId // 해당 리뷰와 연결
+        reviewId: +reviewId // param으로 받아온 reviewId
       },
     });
     return res.status(201).json({ message: "댓글을 등록하였습니다"}); 
 });
 
-
 // // 댓글 전체 조회 API //
 
 router.get("/reviews/:reviewId/comments", async (req, res, next) => {
+
+  const {reviewId} = req.params;
+
+  
+
+//   Prisma로 reviewId에 해당하는 리뷰 찾기 
+const review = await prisma.reviews.findUnique({
+  where : {id : +reviewId}
+}); 
+
+//  reviewId에 해당하는 리뷰가 존재하지 않는 경우 404 에러
+if(!review){
+  return res.status(404).json({ message: "존재하지 않는 리뷰입니다" });
+}
+
+  // body 혹은 params 받지 못한 경우 errorMessage
+  if (!reviewId) {
+    return res
+      .status(400)
+      .json({ errorMessage: "데이터 형식이 올바르지 않습니다" });
+  }
 
   const comments = await prisma.comments.findMany({
     select: {
@@ -56,6 +76,8 @@ router.get("/reviews/:reviewId/comments", async (req, res, next) => {
       createdAt: true,
       updatedAt: true,
     },
+    where : {reviewId : +reviewId}
+
   });
 
   return res.status(200).json({ data: comments });
