@@ -32,6 +32,8 @@ model Comments{
   content String @map("content")
   author String @map("author")
   password String @map("password")
+  reviewId  Int      // 리뷰의 ID를 저장할 필드 추가
+
   createdAt DateTime @default(now()) @map("createdAt")
   updatedAt DateTime @updatedAt @map("updatedAt")
 
