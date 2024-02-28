@@ -3,7 +3,7 @@ import { prisma } from "../utils/prisma/index.js";
 
 const router = express.Router();
 
-// 댓글 등록 API //
+// 댓글 등록 API // gitgit
 
 router.post("/reviews/:reviewId/comments", async (req, res, next) => {
   const { reviewId } = req.params;
