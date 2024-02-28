@@ -8,6 +8,15 @@ const router = express.Router();
 
 router.post("/reviews", async (req, res, next) => {
   const { bookTitle, title, content, starRating, author, password } = req.body;
+  
+  // id           Int 
+  // bookTitle    String 
+  // title        String 
+  // content      String 
+  // starRating   String 
+  // author       String 
+  // password     String
+
 
   // 데이터가 body로 요청되지 않은 경우 errorMessage
   if (!bookTitle || !title || !content || !starRating || !author || !password) {
