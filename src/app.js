@@ -1,6 +1,6 @@
 import express from "express";
-import ReviewsRouter from "./routes/reviews.router.js"
-import CommentsRouter from "./routes/comments.router.js"
+import ReviewsRouter from "./routes/reviews.router.js";
+import CommentsRouter from "./routes/comments.router.js";
 
 const app = express();
 const PORT = 3017;
